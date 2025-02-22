@@ -16,12 +16,14 @@ jobs:
 
       - name: Get Package
         run: |
-            git clone https://github.com/immortalwrt/luci ${GITHUB_WORKSPACE}/luci
-            git clone https://github.com/immortalwrt/packages ${GITHUB_WORKSPACE}/packages
+            git clone https://github.com/immortalwrt/luci -b openwrt-23.05 ${GITHUB_WORKSPACE}/luci
+            git clone https://github.com/immortalwrt/packages -b openwrt-23.05 ${GITHUB_WORKSPACE}/packages
             if [ -d ${GITHUB_WORKSPACE}/luci/applications/luci-app-vlmcsd ];then
+                rm -rf ${GITHUB_WORKSPACE}/luci-app-vlmcsd
                 cp -rf ${GITHUB_WORKSPACE}/luci/applications/luci-app-vlmcsd ${GITHUB_WORKSPACE}/
             fi
             if [ -d ${GITHUB_WORKSPACE}/packages/net/vlmcsd ];then
+                rm -rf ${GITHUB_WORKSPACE}/vlmcsd
                 cp -rf ${GITHUB_WORKSPACE}/packages/net/vlmcsd ${GITHUB_WORKSPACE}/
             fi
             rm -rf ${GITHUB_WORKSPACE}/luci ${GITHUB_WORKSPACE}/packages
